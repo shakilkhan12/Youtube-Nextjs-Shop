@@ -1,6 +1,7 @@
 import Rating from "@/components/Rating";
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home({ products }) {
   return (
@@ -17,7 +18,11 @@ export default function Home({ products }) {
             products.map((product) => {
               const { id, image, title, rating, price } = product;
               return (
-                <div key={id} className="w-full h-auto">
+                <Link
+                  href={`/product/${id}`}
+                  key={id}
+                  className="w-full h-auto"
+                >
                   <div className="w-full h-[160px] relative">
                     <Image
                       src={image}
@@ -32,7 +37,7 @@ export default function Home({ products }) {
                   <h2 className="text-base font-bold text-gray-800">
                     ${price}
                   </h2>
-                </div>
+                </Link>
               );
             })}
         </div>
