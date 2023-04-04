@@ -3,8 +3,11 @@ import Rating from "@/components/Rating";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+import { useCart } from "@/context/CartContext";
 
 export default function Home({ products }) {
+  const { state, dispatch } = useCart();
+  console.log(state);
   return (
     <>
       <Head>
