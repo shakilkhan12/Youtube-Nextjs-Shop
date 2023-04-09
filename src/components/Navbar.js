@@ -1,8 +1,10 @@
+import { useCart } from "@/context/CartContext";
 import { Navbar, Button, Text, useTheme } from "@nextui-org/react";
 import Link from "next/link";
 
 export default function Nav() {
   const { isDark } = useTheme();
+  const { dispatch } = useCart();
 
   return (
     <>
@@ -16,7 +18,12 @@ export default function Nav() {
         <Navbar.Content>
           <Navbar.Item>
             <Button auto flat href="#">
-              Cart
+              <span
+                className="cursor-pointer"
+                onClick={() => dispatch({ type: "OPEN_CART" })}
+              >
+                Cart
+              </span>
             </Button>
           </Navbar.Item>
         </Navbar.Content>
