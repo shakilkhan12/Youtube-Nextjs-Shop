@@ -1,10 +1,20 @@
 import Rating from "@/components/Rating";
+import { useCart } from "@/context/CartContext";
 import Head from "next/head";
 import Image from "next/image";
-import { useRouter } from "next/router";
+import toast from "react-hot-toast";
 
 const Details = ({ product }) => {
+  const { dispatch, state } = useCart();
   const { title, image, category, rating, price, description } = product;
+  const addToCart = () => {
+    dispatch({
+      type: "ADD_TO_CART",
+      payload: { ...product, quantities: 1 },
+      toast,
+    });
+  };
+  console.log("cart => ", state.cart);
   return (
     <>
       <Head>
@@ -30,6 +40,12 @@ const Details = ({ product }) => {
             <Rating rating={rating} />
             <h2 className="text-2xl font-semibold mt-3">${price}</h2>
             <p className="mt-6 text-gray-500 leading-[22px]">{description}</p>
+            <button
+              className="mt-5 inline-block px-6 py-3 rounded-xl bg-black text-white text-sm font-medium capitalize cursor-pointer"
+              onClick={addToCart}
+            >
+              add to cart
+            </button>
           </div>
         </div>
       </div>

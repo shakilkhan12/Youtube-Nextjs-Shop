@@ -3,10 +3,30 @@ const CartReducer = (state, action) => {
   switch (type) {
     case "OPEN_CART":
       return { ...state, cartClass: "right-0" };
-      break;
     case "CLOSE_CART":
       return { ...state, cartClass: "-right-full" };
-      break;
+    case "ADD_TO_CART":
+      const product = state.cart.find((item) => item.id === payload.id);
+      if (product) {
+        action.toast("Sorry, product is already in the cart", {
+          icon: "👏",
+          style: {
+            borderRadius: "10px",
+            background: "#333",
+            color: "#fff",
+          },
+        });
+      } else {
+        action.toast("Great job, Product added in the cart", {
+          icon: "👏",
+          style: {
+            borderRadius: "10px",
+            background: "#333",
+            color: "#fff",
+          },
+        });
+        return { ...state, cart: [...state.cart, payload] };
+      }
     default:
       return state;
   }
